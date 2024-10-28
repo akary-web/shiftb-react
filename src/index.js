@@ -1,10 +1,13 @@
-import React from 'react';
+// 最初の呼び出される起動ファイル（エントリーポイント）
+import React from 'react';//省くとエラーになる。→React 17以前の構文に依存しているルールがESLint設定に含まれているため
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+//Reactアプリケーションのルート要素を作成し、その要素にReactコンポーネントをレンダリングするために使用される。
+
 root.render(
   <React.StrictMode>
     <App />

@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+// Appコンポーネントの本体
+import React from 'react';//React 17以降は、なくてもOK
+import { Header } from './header/header';//名前付きだから{}が付くよ
+import { PostsList } from './top/postsList';//名前付きだから{}が付くよ
+import './destyle.css';
+// import './App.css';
 
-function App() {
+
+
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          testします
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <PostsList />
     </div>
   );
 }
-
-export default App;
+// export default App;デフォルトではなく、名前付きexportで
