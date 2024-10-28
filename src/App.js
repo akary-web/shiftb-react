@@ -1,9 +1,9 @@
 // Appコンポーネントの本体
 import React from 'react';//React 17以降は、なくてもOK
-import { Header } from './header';//名前付きだから{}が付くよ
-import { PostsList } from './postsList';//名前付きだから{}が付くよ
+import { Header } from './header/header';//名前付きだから{}が付くよ
+import { PostsList } from './top/postsList';//名前付きだから{}が付くよ
 import './destyle.css';
-import './App.css';
+// import './App.css';
 
 
 

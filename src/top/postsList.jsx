@@ -1,21 +1,21 @@
 import React from 'react';//React 17以降は、なくてもOK
-import { posts } from './data/posts'; // 記事データをimport。名前付きimportだから{}が付くよ
-
+import { posts } from '../data/posts'; // 記事データをimport。名前付きimportだから{}が付くよ
+import styles from './postsList.module.css'; // CSS Modulesをインポート
 
 export const PostsList = () => {
   return (
-    <div className='post_container'>
+    <div className={styles.post_container}>
       {posts.map((post) => (
-        <div className='post_list' key={post.id} >
-          <div className='post_info'>
-            <p className='post_date'>{new Date(post.createdAt).toLocaleDateString()}</p>
-            <ul className='post_cate'>
+        <div className={styles.post_list} key={post.id} >
+          <div className={styles.post_info}>
+            <p className={styles.post_date}>{new Date(post.createdAt).toLocaleDateString()}</p>
+            <ul className={styles.post_cate}>
               {post.categories.map((cate, index) => (
-                <li className='cate_item' key={index}>{cate}</li>
+                <li className={styles.cate_item} key={index}>{cate}</li>
               ))}
             </ul>
           </div>
-          <h2 className='post_title'>{post.title}</h2>
+          <h2 className={styles.post_title}>{post.title}</h2>
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>
       ))}
