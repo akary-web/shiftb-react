@@ -15,5 +15,4 @@ export const App = () => {
     </div>
   );
 }
-
 // export default App;デフォルトではなく、名前付きexportで
