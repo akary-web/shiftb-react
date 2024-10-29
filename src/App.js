@@ -12,7 +12,7 @@ export const App = () => {
       <Header />  {/* 共通するヘッダーだから、Routesの中には入れない */}
       <Routes>
         <Route path="/" element={<PostsList />} />
-        <Route path="/posts/:postNumber" element={<PostsDetail />} />
+        <Route path="/posts/:id" element={<PostsDetail />} />
       </Routes>
     </div>
   );
