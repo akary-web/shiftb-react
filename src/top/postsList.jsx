@@ -1,23 +1,26 @@
 import React from 'react';//React 17以降は、なくてもOK
 import { posts } from '../data/posts'; // 記事データをimport。名前付きimportだから{}が付くよ
 import styles from './postsList.module.css'; // CSS Modulesをインポート
+import { Link } from 'react-router-dom';//リンクを作成するためにLinkコンポーネントをインポート
 
 export const PostsList = () => {
   return (
     <div className={styles.post_container}>
       {posts.map((post) => (
-        <div className={styles.post_list} key={post.id} >
-          <div className={styles.post_info}>
-            <p className={styles.post_date}>{new Date(post.createdAt).toLocaleDateString()}</p>
-            <ul className={styles.post_cate}>
-              {post.categories.map((cate, index) => (
-                <li className={styles.cate_item} key={index}>{cate}</li>
-              ))}
-            </ul>
+        <Link to={`/posts/${post.id}`} key={post.id}> {/* keyをLinkに移動 */}
+          <div className={styles.post_list} >
+            <div className={styles.post_info}>
+              <p className={styles.post_date}>{new Date(post.createdAt).toLocaleDateString()}</p>
+              <ul className={styles.post_cate}>
+                {post.categories.map((cate, index) => (
+                  <li className={styles.cate_item} key={index}>{cate}</li>
+                ))}
+              </ul>
+            </div>
+            <h2 className={styles.post_title}>{post.title}</h2>
+            <div dangerouslySetInnerHTML={{ __html: post.content }} />
           </div>
-          <h2 className={styles.post_title}>{post.title}</h2>
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
-        </div>
+        </Link>
       ))}
     </div>
   )

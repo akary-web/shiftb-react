@@ -1,41 +1,34 @@
-.header {
-  align-items: center;
-  background-color: #333;
-  color: #fff;
-  display: flex;
-  font-weight: 700;
-  justify-content: space-between;
-  padding: 24px;
-}
-
-.post_container {
+.detail_container {
   margin: 40px auto;
   max-width: 800px;
   padding: 0 1rem;
 }
 
-.post_list{
-  border: 1px solid #ccc;
-  margin-bottom: 2rem;
+.detail_thumbnail {
+  height: auto;
+  max-width: 100%;
+}
+
+.detail_detail {
   padding: 1rem;
 }
 
-.post_info {
+.detail_info {
   display: flex;
   justify-content: space-between;
 }
 
-.post_date {
+.detail_date {
   color: #888;
   font-size: 0.8rem;
 }
 
-.post_cate {
+.detail_cate {
   display: flex;
   justify-content: flex-end;
 }
 
-.cate_item {
+.detail_item {
   border: 1px solid #06c;
   border-radius: .2rem;
   color: #06c;
@@ -44,12 +37,13 @@
   padding: .2rem .4rem;
 }
 
-.post_title {
+.detail_title {
   font-size: 1.5rem;
   margin-bottom: 1rem;
   margin-top: .5rem;
 }
 
-.post_content {
-  margin-bottom: 2rem;
+.detail_text {
+  font-size: 1rem;
+  line-height: 1.5;
 }
