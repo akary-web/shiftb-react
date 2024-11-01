@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export const PostsList = () => {
 
-  const [posts, setPosts] = useState([])//初期値がからの配列[]。APIから投稿データを取得するまで、postsは空の状態ってこと
+  const [posts, setPosts] = useState([])//初期値がからの配列[]。APIから投稿データを取得するまで、postsは空の状態ってこと  
   const [isLoading, setIsLoading] = useState(true);// 読み込み中かどうかの状態を管理
 
   // APIでpostsを取得する処理をuseEffectで実行。by bube
@@ -34,7 +34,7 @@ export const PostsList = () => {
     return <div>・・・読み込み中です・・・</div>//読み込み中の表示を追加
   }
 
-  if (!posts) {
+  if (posts.length === 0)  {//posts = [] の場合true。!posts はfalseになるので実行されない by bube
     return <div>投覧が見つかりませんでした。</div>; //この処理を入れておくことで、記事が見つからなかった場合のエラーを発生させず、記事が見つからないことを閲覧者に伝えることができる。
   }
   return (
