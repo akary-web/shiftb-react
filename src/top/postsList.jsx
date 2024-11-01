@@ -1,9 +1,42 @@
-import React from 'react';//React 17以降は、なくてもOK
-import { posts } from '../data/posts'; // 記事データをimport。名前付きimportだから{}が付くよ
-import styles from './postsList.module.css'; // CSS Modulesをインポート
-import { Link } from 'react-router-dom';//リンクを作成するためにLinkコンポーネントをインポート
+import React from 'react';
+import { useState, useEffect } from 'react';
+import styles from './postsList.module.css';
+import { Link } from 'react-router-dom';
 
 export const PostsList = () => {
+
+  const [posts, setPosts] = useState([])//初期値がからの配列[]。APIから投稿データを取得するまで、postsは空の状態ってこと  
+  const [isLoading, setIsLoading] = useState(true);// 読み込み中かどうかの状態を管理
+
+  // APIでpostsを取得する処理をuseEffectで実行。by bube
+  useEffect(() => {
+    const fetcher = async () => {
+
+      setIsLoading(true);// 読み込み開始時にisLoadingをtrueに設定
+
+      try {//エラーが出る可能性があるコード
+        const res = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts")
+        const data = await res.json()
+        setPosts(data.posts)
+      }
+      catch (error) {//エラーを出した場合、catch ブロックが実行され、エラーの詳細が error 変数に渡る。
+        console.error("データの取得に失敗しました:", error);//console.errorはエラー内容を確認するためのメッセージを出力するための関数
+      }
+      finally {
+        setIsLoading(false); // 読み込み完了後にisLoadingをfalseに設定
+      }
+    }
+
+    fetcher()
+  }, [])//第二引数の依存配列を空配列`[]`とすることで、コンポーネントのレンダリング時に一度だけ処理を発火。ページ読込時にデータ取得したい時に用いる手法。by bube
+
+  if (isLoading) {
+    return <div>・・・読み込み中です・・・</div>//読み込み中の表示を追加
+  }
+
+  if (posts.length === 0)  {//posts = [] の場合true。!posts はfalseになるので実行されない by bube
+    return <div>投覧が見つかりませんでした。</div>; //この処理を入れておくことで、記事が見つからなかった場合のエラーを発生させず、記事が見つからないことを閲覧者に伝えることができる。
+  }
   return (
     <div className={styles.post_container}>
       {posts.map((post) => (
@@ -25,13 +58,3 @@ export const PostsList = () => {
     </div>
   )
 };
-
-//メモ
-//key属性：map()を使ってリスト要素をレンダリングする際に使用。重要：データの一意な識別子を使うのが一般駅（idなど）by chatGPT
-//カテ：インデックスがなくてもリストは作成できるが、keyがユニークであることを確認することが重要。リスト内に重複する要素がない場合は、インデックスは省略できる。by chatGPT
-//toLocaleDateString()ローカライズされた日付を返すDateオブジェクトに関するメソッド 
-//<p>{post.content}</p> では<br>がそのまま表示されてしまう。cssで処理できない
-// dangerouslySetInnerHTML={{ __html: post.content }}を提案される　by chatGPT
-//書籍にも記述あるが、使うシーンがいまいち想定できていない
-
-// export default PostsList;　デフォルトではなく、名前付きexportにしている
