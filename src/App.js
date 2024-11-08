@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Header } from './header/header';//名前付きだから{}が付くよ
 import { PostsList } from './top/postsList';//名前付きだから{}が付くよ
 import { PostsDetail } from './detail/postsDetail';//記事詳細ページのimport
+import { ContactForm } from './form/contactForm';
 import './destyle.css';
 
 export const App = () => {
@@ -13,6 +14,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<PostsList />} />
         <Route path="/posts/:id" element={<PostsDetail />} />
+        <Route path="/contact" element={<ContactForm />}/>
       </Routes>
     </div>
   );

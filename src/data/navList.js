@@ -8,6 +8,6 @@ export const nav = [
   {
     id: 2,
     name: 'お問い合わせ',
-    href: ''
+    href: '/contact'
   },
 ]
