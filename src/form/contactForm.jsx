@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "./contactForm.module.css";
 
@@ -6,17 +6,12 @@ export const ContactForm = () => {
   const {
     register,//各フォームフィールドにバリデーションを設定して入力データを取得するための関数
     handleSubmit,//ォームが正しく入力された場合にonSubmit関数を呼び出す？
-    formState: { errors },//各フィールドのエラーメッセージを管理する
+    formState: { errors, isSubmitting },//各フィールドのエラーメッセージを管理する
     reset,//フォーム送信後に入力内容をクリアするための関数
   } = useForm();
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  //↑この状態管理は、フォームが送信中かどうか？を追跡し、UIの挙動（ボタンの有効・無効や入力）を制御するため
-
-
-  // フォーム送信処理 //ここがわからない
+  // フォーム送信処理 //ここがすごくすっきりした！
   const onSubmit = async (data) => {
-    setIsSubmitting(true); // 送信中はボタンや入力を無効化
     try {
       const response = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/contacts", {
         method: "POST",
@@ -29,14 +24,11 @@ export const ContactForm = () => {
       if (!response.ok) {
         throw new Error("送信に失敗しました");
       }
-
       alert("送信しました"); // 送信完了のアラート
       reset(); // フォーム内容をクリア
     } catch (error) {
       console.error("送信エラー:", error);
       alert("送信に失敗しました。もう一度お試しください。");
-    } finally {
-      setIsSubmitting(false); // 送信終了後にボタンを有効化
     }
   };
 
